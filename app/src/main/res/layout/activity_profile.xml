@@ -1,0 +1,239 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/white"
+    android:textColor="@color/grey">
+
+    <!-- Profile Image -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/profile_picture_border" />
+
+    <!-- Profile Name -->
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <!-- Profile Email -->
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user_email@gmail.com"
+        android:textSize="14sp"
+        android:layout_below="@id/profile_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <!-- Edit Profile Button -->
+    <Button
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:backgroundTint="@color/green"
+    android:textColor="@android:color/white"
+    android:layout_below="@id/profile_email"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/personal_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#9D424242"
+        android:layout_below="@id/btn_edit_profile"
+        android:padding="10dp"
+        android:layout_marginTop="20dp" />
+
+    <!-- Inventory Section -->
+    <LinearLayout
+        android:id="@+id/inventory_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/personal_details_title"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_edittext">
+
+        <!-- Support -->
+        <LinearLayout
+            android:id="@+id/ph_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Phone Number: "
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/user_ph_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="user_ph_no"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Address: "
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tv_support"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="user_address"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Current Role: "
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/cuurent_user_role"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="user_ph_no"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Vehicle Details Title -->
+    <TextView
+        android:id="@+id/vehicle_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#9D424242"
+        android:layout_below="@id/inventory_section"
+        android:padding="10dp"
+        android:layout_marginTop="30dp" />
+
+    <!-- Preferences Section -->
+    <LinearLayout
+        android:id="@+id/vehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/vehicle_details_title"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_edittext">
+
+        <!-- Vehicle Type -->
+        <LinearLayout
+            android:id="@+id/vehicle_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vehicle Type"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+            <TextView
+                android:id="@+id/user_vehicle_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="vehicle_type"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- Vehicle Number -->
+        <LinearLayout
+            android:id="@+id/vehicle_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vehicle number"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+            <TextView
+                android:id="@+id/user_vehicle_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="vehicle_number"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+            android:layout_gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

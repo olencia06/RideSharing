@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" />
+    <stroke
+        android:width="2dp"
+        android:color="#A1686868" /> <!-- Use the same green color from your theme -->
+    <corners android:radius="50dp" />
+</shape>
