@@ -11,7 +11,7 @@
         android:id="@+id/details_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vehicle Details"
+        android:text="User Details"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="#9D424242"
@@ -20,7 +20,7 @@
         android:layout_marginBottom="20dp"
         android:layout_alignParentTop="true"/>
 
-    <!-- Inventory Section -->
+    <!-- User Info Section -->
     <LinearLayout
         android:id="@+id/inventory_section"
         android:layout_width="match_parent"
@@ -31,32 +31,42 @@
         android:padding="10dp"
         android:background="@drawable/rounded_edittext">
 
-        <!-- Vehicle Model -->
+        <!-- Name Field -->
         <EditText
-            android:id="@+id/et_vehicle_model"
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="vehicle_model"
+            android:hint="user_name"
             android:textColorHint="@color/hint"
             android:layout_marginTop="20dp"
             android:textColor="@color/black"/>
 
-        <!-- Vehicle License -->
+        <!-- Email Field -->
         <EditText
-            android:id="@+id/et_vehicle_license"
+            android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="vehicle_license"
+            android:hint="user_email"
             android:textColorHint="@color/hint"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
 
-        <!-- Vehicle Capacity -->
+        <!-- Password Field -->
         <EditText
-            android:id="@+id/et_vehicle_capacity"
+            android:id="@+id/user_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Vehicle Capacity"
+            android:hint="user_password"
+            android:textColorHint="@color/hint"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
+
+        <!-- Phone Number Field -->
+        <EditText
+            android:id="@+id/user_ph_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="user_ph_number"
             android:textColorHint="@color/hint"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
@@ -66,11 +76,12 @@
             android:id="@+id/btn_save_vehicle"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/green"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="20dp" />
+            android:gravity="center"
+            android:text="Add User"
+
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </RelativeLayout>

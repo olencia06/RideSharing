@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Managment"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#9D424242"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentTop="true"
+        tools:ignore="HardcodedText,ObsoleteLayoutParam"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Add User Button -->
+    <Button
+        android:id="@+id/btn_add_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add User"
+        android:backgroundTint="@color/green"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="12dp"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="HardcodedText" />
+
+    <!-- Display All Users Button -->
+    <Button
+        android:id="@+id/btn_display_users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Display All Users"
+        android:backgroundTint="@color/green"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="12dp"
+        tools:ignore="HardcodedText" />
+
+    <!-- Manage Users Button -->
+    <Button
+        android:id="@+id/btn_manage_users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Users"
+        android:backgroundTint="@color/green"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="12dp"
+        tools:ignore="HardcodedText" />
+
+    <!-- RecyclerView for displaying users -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_users"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />  <!-- Initially hidden -->
+
+</LinearLayout>

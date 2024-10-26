@@ -47,10 +47,10 @@
         android:layout_height="wrap_content"
         android:text="Edit Profile"
         android:backgroundTint="@color/green"
-    android:textColor="@android:color/white"
-    android:layout_below="@id/profile_email"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp" />
+        android:textColor="@android:color/white"
+        android:layout_below="@id/profile_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/personal_details_title"
@@ -147,11 +147,11 @@
                 android:layout_gravity="center_vertical" />
 
             <TextView
-                android:id="@+id/cuurent_user_role"
+                android:id="@+id/current_user_role"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="user_ph_no"
+                android:text="user_role"
                 android:textSize="16sp"
                 android:textColor="@color/grey"
                 android:layout_gravity="center_vertical" />
@@ -159,17 +159,41 @@
     </LinearLayout>
 
     <!-- Vehicle Details Title -->
-    <TextView
-        android:id="@+id/vehicle_details_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/vehicle_details"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vehicle Details"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#9D424242"
-        android:layout_below="@id/inventory_section"
+        android:orientation="vertical"
         android:padding="10dp"
-        android:layout_marginTop="30dp" />
+        android:layout_below="@id/inventory_section">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/vehicle_details_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vehicle Details"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#9D424242"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/btn_add_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Vehicle Details"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Preferences Section -->
     <LinearLayout
@@ -177,10 +201,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/vehicle_details_title"
+        android:layout_below="@id/vehicle_details"
         android:layout_marginTop="5dp"
         android:padding="10dp"
-        android:background="@drawable/rounded_edittext">
+        android:background="@drawable/rounded_edittext"
+        android:visibility="gone"> <!-- Set visibility to gone or invisible -->
 
         <!-- Vehicle Type -->
         <LinearLayout
@@ -233,7 +258,34 @@
                 android:text="vehicle_number"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
-            android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vehicle_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vehicle capacity"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+            <TextView
+                android:id="@+id/user_vehicle_capacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="vehicle_capacity"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

@@ -7,10 +7,13 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,9 +22,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import androidx.appcompat.widget.SwitchCompat;
 
 public class HomeActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -29,21 +36,33 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private static final String TAG = "HomeActivity"; // Logging tag
     private GoogleMap mMap;
+    private FirebaseFirestore db;
     private FusedLocationProviderClient fusedLocationClient;
-    private SwitchCompat toggleButton;
-    private boolean isVehicleDetailsStored = false;
+
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Check if vehicle details are already stored
-        checkVehicleDetails();
+        // Initialize FirebaseAuth
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getEmail(); // Use user's email as userId
+            // Check vehicle details for the logged-in user
+        } else {
+            Log.e(TAG, "User not logged in");
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
+            finish(); // Close HomeActivity if user is not logged in
+            return; // Ensure no further execution if user is not logged in
+        }
 
         Log.d(TAG, "onCreate: HomeActivity started");
 
-        // Initialize FusedLocationProviderClient
+        db = FirebaseFirestore.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -59,45 +78,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
 
-        // Toggle button listener
-        toggleButton = findViewById(R.id.toggle_role);
-        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // If vehicle details are not stored, prompt the user to enter them
-                if (!isVehicleDetailsStored) {
-                    Intent vehicleDetailsIntent = new Intent(HomeActivity.this, VehicleDetailsActivity.class);
-                    startActivity(vehicleDetailsIntent);
-                }
-            }
-        });
+        // Initialize toggle button
+
     }
 
-    private void checkVehicleDetails() {
-        // This method should query your database to check if vehicle details are stored
-        // For example:
-        // if (yourDatabase.hasVehicleDetails(userId)) {
-        //     isVehicleDetailsStored = true;
-        //     Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
-        //     startActivity(profileIntent);
-        //     finish(); // Close HomeActivity
-        // }
-
-        // Simulated check (replace with actual database check)
-        boolean vehicleDetailsExist = checkDatabaseForVehicleDetails();
-        if (vehicleDetailsExist) {
-            isVehicleDetailsStored = true;
-            Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
-            startActivity(profileIntent);
-            finish(); // Close HomeActivity
-        }
-    }
-
-    private boolean checkDatabaseForVehicleDetails() {
-        // Simulate a database check. Replace with actual database query.
-        // For example:
-        // return database.hasVehicleDetails(userId);
-        return false; // Change this based on actual check
-    }
 
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         Log.d(TAG, "BottomNav: ItemSelected=" + item.getTitle());
@@ -151,6 +135,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                         } else {
                             Log.e(TAG, "getCurrentLocation: Location is null");
                         }
+                    }).addOnFailureListener(e -> {
+                        Log.e(TAG, "getCurrentLocation: Failed to fetch location", e);
                     });
         } else {
             Log.e(TAG, "getCurrentLocation: Permission not granted");
@@ -170,6 +156,7 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             } else {
                 Log.e(TAG, "onRequestPermissionsResult: Location permission denied");
+                Toast.makeText(this, "Location permission is required to show your current location.", Toast.LENGTH_SHORT).show();
             }
         }
     }
