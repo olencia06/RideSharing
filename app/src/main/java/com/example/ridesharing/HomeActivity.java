@@ -1,5 +1,9 @@
 package com.example.ridesharing;
 
+import android.view.View; // For View
+import com.google.firebase.database.DatabaseError; // For DatabaseError
+import com.google.firebase.database.ValueEventListener; // For ValueEventListener
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,22 +28,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import androidx.appcompat.widget.SwitchCompat;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private static final String TAG = "HomeActivity"; // Logging tag
     private GoogleMap mMap;
-    private FirebaseFirestore db;
     private FusedLocationProviderClient fusedLocationClient;
-
     private FirebaseUser currentUser;
+    private FloatingActionButton fabAddRide; // Declare FAB
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,12 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseAuth auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
 
+
+
+
         if (currentUser != null) {
-            String userId = currentUser.getEmail(); // Use user's email as userId
-            // Check vehicle details for the logged-in user
+            String userId = currentUser.getUid(); // Use user's UID as userId
+            checkUserRole(userId); // Check vehicle details for the logged-in user
         } else {
             Log.e(TAG, "User not logged in");
             startActivity(new Intent(HomeActivity.this, MainActivity.class));
@@ -62,8 +69,16 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
 
         Log.d(TAG, "onCreate: HomeActivity started");
 
-        db = FirebaseFirestore.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fabAddRide = findViewById(R.id.fab_add_ride); // Initialize FAB
+
+        fabAddRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, AddRideActivity.class);
+                startActivity(intent);
+            }
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -77,11 +92,27 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         // Initialize BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
-
-        // Initialize toggle button
-
     }
 
+    private void checkUserRole(String userId) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String role = snapshot.child("role").getValue(String.class);
+                if ("Driver".equals(role)) {
+                    fabAddRide.setVisibility(View.VISIBLE); // Show FAB for drivers
+                } else {
+                    fabAddRide.setVisibility(View.GONE); // Hide FAB for passengers
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "Failed to read user role", error.toException());
+            }
+        });
+    }
 
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         Log.d(TAG, "BottomNav: ItemSelected=" + item.getTitle());
@@ -103,6 +134,10 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         }
     };
+
+
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

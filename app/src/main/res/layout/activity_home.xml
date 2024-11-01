@@ -5,26 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-
-
-
     <!-- Google Map Fragment -->
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       />
-
-
+        android:layout_height="match_parent" />
 
     <!-- FrameLayout for Home, Book, Profile content -->
     <FrameLayout
         android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"
-        />
+        android:layout_above="@id/bottom_navigation" />
 
     <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,5 +29,20 @@
         app:itemIconTint="@color/green"
         app:itemTextColor="@color/green"
         app:menu="@menu/navigation_menu" />
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_ride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/bottom_navigation"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="Add Ride"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/green"
+        android:visibility="visible"
+        android:elevation="8dp"/>
 
 </RelativeLayout>

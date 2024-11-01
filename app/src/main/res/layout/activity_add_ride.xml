@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Your Ride"
+        android:textSize="24sp"
+        android:textColor="@color/green"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Driver's Phone Number"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/editTextVehicleType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Type"
+        android:enabled="false"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/editTextVehicleNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Number"
+        android:enabled="false"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/editTextSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Available Seats"
+        android:inputType="number"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Departure Time"
+        android:focusable="false"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Departure Date"
+        android:focusable="false"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext_background"
+    android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/buttonPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Ride"
+        android:textColor="@android:color/white"
+        android:background="@color/green"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:elevation="4dp"
+        android:fontFamily="sans-serif-medium"/>
+</LinearLayout>
